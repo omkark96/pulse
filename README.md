@@ -20,35 +20,10 @@
 
 ## Requirements
 
-For the released app:
-
 - Apple Silicon Mac
 - macOS 13 or later
 
-For building from source, install the Xcode Command Line Tools. You do not need
-full Xcode:
-
-```bash
-xcode-select --install
-```
-
-## Install from source
-
-```bash
-git clone https://github.com/omkark96/pulse.git
-cd pulse
-./build.sh
-open ~/Applications/Pulse.app
-```
-
-`build.sh` creates an ad-hoc signed app and copies it to `~/Applications`.
-
-macOS can show an unidentified developer warning because this build is not
-notarized. Open the app from Finder once, or remove quarantine after download:
-
-```bash
-xattr -dr com.apple.quarantine ~/Applications/Pulse.app
-```
+You do not need Xcode or the Xcode Command Line Tools to install the released app.
 
 ## Install with Homebrew
 
@@ -72,18 +47,6 @@ open the app from Finder once, or remove its quarantine flag:
 ```bash
 xattr -dr com.apple.quarantine /Applications/Pulse.app
 open -a Pulse
-```
-
-## Build
-
-```bash
-swift build -c release
-```
-
-To build and launch the local app bundle:
-
-```bash
-./run.sh
 ```
 
 ## Display modes
