@@ -1,0 +1,9 @@
+.build/
+.build-*/
+.swiftpm/
+.DS_Store
+Pulse.app/
+*.zip
+
+# Local tooling
+.env

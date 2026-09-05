@@ -1,0 +1,48 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build universal app and publish release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          VERSION="${GITHUB_REF_NAME#v}"
+          ARM64_BUILD="$RUNNER_TEMP/pulse-arm64"
+          X86_BUILD="$RUNNER_TEMP/pulse-x86_64"
+
+          swift build -c release --arch arm64 --scratch-path "$ARM64_BUILD"
+          swift build -c release --arch x86_64 --scratch-path "$X86_BUILD"
+
+          mkdir -p Pulse.app/Contents/MacOS
+          cp "$ARM64_BUILD/arm64-apple-macosx/release/Pulse" "$RUNNER_TEMP/Pulse-arm64"
+          lipo -create \
+            "$RUNNER_TEMP/Pulse-arm64" \
+            "$X86_BUILD/x86_64-apple-macosx/release/Pulse" \
+            -output Pulse.app/Contents/MacOS/Pulse
+          cp Info.plist Pulse.app/Contents/Info.plist
+          /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $VERSION" Pulse.app/Contents/Info.plist
+          /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $VERSION" Pulse.app/Contents/Info.plist
+
+          xattr -cr Pulse.app
+          codesign --sign - --force --deep Pulse.app
+          ditto -c -k --keepParent Pulse.app "Pulse-$VERSION.zip"
+          shasum -a 256 "Pulse-$VERSION.zip" | tee SHA256SUMS
+
+          gh release create "$GITHUB_REF_NAME" \
+            "Pulse-$VERSION.zip#Pulse $VERSION" \
+            SHA256SUMS \
+            --title "Pulse $VERSION" \
+            --generate-notes
