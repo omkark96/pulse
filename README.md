@@ -20,9 +20,17 @@
 
 ## Requirements
 
+For the released app:
+
 - Apple Silicon Mac
 - macOS 13 or later
-- Xcode Command Line Tools
+
+For building from source, install the Xcode Command Line Tools. You do not need
+full Xcode:
+
+```bash
+xcode-select --install
+```
 
 ## Install from source
 
