@@ -20,6 +20,7 @@
 
 ## Requirements
 
+- Apple Silicon Mac
 - macOS 13 or later
 - Xcode Command Line Tools
 

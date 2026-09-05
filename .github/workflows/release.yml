@@ -22,16 +22,11 @@ jobs:
           set -euo pipefail
           VERSION="${GITHUB_REF_NAME#v}"
           ARM64_BUILD="$RUNNER_TEMP/pulse-arm64"
-          X86_BUILD="$RUNNER_TEMP/pulse-x86_64"
 
           swift build -c release --arch arm64 --scratch-path "$ARM64_BUILD"
-          swift build -c release --arch x86_64 --scratch-path "$X86_BUILD"
 
           mkdir -p Pulse.app/Contents/MacOS
-          lipo -create \
-            "$ARM64_BUILD/arm64-apple-macosx/release/Pulse" \
-            "$X86_BUILD/x86_64-apple-macosx/release/Pulse" \
-            -output Pulse.app/Contents/MacOS/Pulse
+          cp "$ARM64_BUILD/arm64-apple-macosx/release/Pulse" Pulse.app/Contents/MacOS/Pulse
           cp Info.plist Pulse.app/Contents/Info.plist
           /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $VERSION" Pulse.app/Contents/Info.plist
           /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $VERSION" Pulse.app/Contents/Info.plist
