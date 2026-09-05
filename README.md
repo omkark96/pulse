@@ -50,16 +50,29 @@ notarized. Open the app from Finder once, or remove quarantine after download:
 xattr -dr com.apple.quarantine ~/Applications/Pulse.app
 ```
 
-## Homebrew
+## Install with Homebrew
 
-Pulse can use a custom Homebrew tap after you publish a release and a cask:
+To install the latest release, add the Pulse tap and install the cask:
 
 ```bash
 brew tap omkark96/pulse
-brew install --cask --no-quarantine omkark96/pulse/pulse
+brew install --cask omkark96/pulse/pulse
 ```
 
-The `--no-quarantine` flag is needed for an unsigned or ad-hoc signed build.
+Homebrew trusts an explicitly requested cask on current versions. If Homebrew
+reports that the cask is not trusted, trust only this cask:
+
+```bash
+brew trust --cask omkark96/pulse/pulse
+```
+
+Pulse is ad-hoc signed and not notarized. If macOS blocks the first launch,
+open the app from Finder once, or remove its quarantine flag:
+
+```bash
+xattr -dr com.apple.quarantine /Applications/Pulse.app
+open -a Pulse
+```
 
 ## Build
 
