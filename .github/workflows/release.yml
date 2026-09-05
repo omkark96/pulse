@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -27,9 +28,8 @@ jobs:
           swift build -c release --arch x86_64 --scratch-path "$X86_BUILD"
 
           mkdir -p Pulse.app/Contents/MacOS
-          cp "$ARM64_BUILD/arm64-apple-macosx/release/Pulse" "$RUNNER_TEMP/Pulse-arm64"
           lipo -create \
-            "$RUNNER_TEMP/Pulse-arm64" \
+            "$ARM64_BUILD/arm64-apple-macosx/release/Pulse" \
             "$X86_BUILD/x86_64-apple-macosx/release/Pulse" \
             -output Pulse.app/Contents/MacOS/Pulse
           cp Info.plist Pulse.app/Contents/Info.plist
