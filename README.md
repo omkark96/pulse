@@ -1,5 +1,9 @@
 # Pulse
 
+<p align="center">
+  <img src="assets/pulse-icon.png" width="128" alt="Pulse app icon">
+</p>
+
 ## The slowdown you keep accepting
 
 A Mac can waste your time without crashing.
@@ -15,6 +19,8 @@ Pulse does not pretend to diagnose the cause. It gives you the facts you need to
 Pulse is small, local, and quiet. It does not ask you to create an account, learn a dashboard, wait for an alert, or hand your system data to a service.
 
 If your Mac interrupts you often enough to notice, Pulse belongs in the menu bar.
+
+![Pulse showing CPU, network, and battery metrics with its display-mode menu](assets/pulse-menu.png)
 
 ## Install
 

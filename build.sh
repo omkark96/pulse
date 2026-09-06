@@ -7,6 +7,7 @@ APP="Pulse.app/Contents/MacOS"
 mkdir -p "$APP"
 cp .build/release/Pulse "$APP/"
 cp Info.plist Pulse.app/Contents/
+cp assets/AppIcon.icns Pulse.app/Contents/
 
 # Unregister stale local copy to prevent duplicate LS entries
 /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister \
