@@ -1,62 +1,57 @@
 # Pulse
 
-<p align="center">
-  CPU, battery, and network speed in the macOS menu bar.
-</p>
+## The slowdown you keep accepting
 
-<p align="center">
-  <img src="https://img.shields.io/badge/platform-macOS%2013%2B-111111?style=flat-square" alt="macOS 13 or later">
-  <img src="https://img.shields.io/badge/swift-5.9%2B-111111?style=flat-square" alt="Swift 5.9 or later">
-</p>
+A Mac can waste your time without crashing.
 
-## Features
+A window opens late. A tab stops responding for a second. The fan starts for no clear reason. You wait, continue working, and forget about it. Then it happens again.
 
-- Shows CPU use.
-- Shows battery level and charging state.
-- Shows download and upload speed.
-- Offers CPU-only, battery-only, network-only, and all-metrics modes.
-- Uses a native macOS status item.
-- Uses no third-party runtime dependencies.
+Each delay is small. The doubt is not. You start wondering whether the Mac is busy, the network is slow, or something is using more power than it should. Activity Monitor can answer that question, but opening it is often more effort than the problem seems to deserve.
 
-## Requirements
+Pulse keeps CPU, battery, and network activity visible in the menu bar. When the Mac feels wrong, you can check whether it is busy before opening Activity Monitor.
 
-- Apple Silicon Mac
-- macOS 13 or later
+Pulse does not pretend to diagnose the cause. It gives you the facts you need to decide what to check next.
 
-You do not need Xcode or the Xcode Command Line Tools to install the released app.
+Pulse is small, local, and quiet. It does not ask you to create an account, learn a dashboard, wait for an alert, or hand your system data to a service.
 
-## Install with Homebrew
+If your Mac interrupts you often enough to notice, Pulse belongs in the menu bar.
 
-To install the latest release, add the Pulse tap and install the cask:
+## Install
+
+Pulse runs on Apple Silicon Macs with macOS 13 or later. You do not need Xcode or the Xcode Command Line Tools to install the released app.
+
+Install the latest release with Homebrew:
 
 ```bash
 brew tap omkark96/pulse
 brew install --cask omkark96/pulse/pulse
 ```
 
-Homebrew trusts an explicitly requested cask on current versions. If Homebrew
-reports that the cask is not trusted, trust only this cask:
+Homebrew trusts an explicitly requested cask on current versions. If Homebrew reports that the cask is not trusted, trust only this cask:
 
 ```bash
 brew trust --cask omkark96/pulse/pulse
 ```
 
-Pulse is ad-hoc signed and not notarized. If macOS blocks the first launch,
-open the app from Finder once, or remove its quarantine flag:
+Pulse is ad-hoc signed and not notarized. If macOS blocks the first launch, open the app from Finder once, or remove its quarantine flag:
 
 ```bash
 xattr -dr com.apple.quarantine /Applications/Pulse.app
 open -a Pulse
 ```
 
-## Display modes
+## Choose a display mode
 
-Right-click the Pulse status item to choose what it shows:
+Click the Pulse status item, then choose a display mode:
 
 - Show All
 - Only Network
 - Only CPU
 - Only Battery
+
+## Privacy
+
+Pulse reads system data on your Mac. It does not send that data anywhere.
 
 ## License
 
